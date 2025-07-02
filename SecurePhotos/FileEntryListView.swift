@@ -16,7 +16,7 @@ struct FileEntryListView: View {
                     NavigationLink {
                         FileEntryView(entry: entry)
                     } label: {
-                        Text(entry.url.lastPathComponent)
+                        Text(entry.relativeFilePath)
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -62,7 +62,7 @@ struct FileEntryListView: View {
                     try data.write(to: url)
                     print("Image file saved")
                     
-                    let entry = FileEntry(timeCreated: Date(), fileType: UTType.jpeg, url: url)
+                    let entry = FileEntry(timeCreated: Date(), fileType: UTType.jpeg, relativeFilePath: filename)
                     
                     DispatchQueue.main.async {
                         withAnimation {
@@ -84,17 +84,16 @@ struct FileEntryListView: View {
     private func addTextFile() {
         withAnimation {
             let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let url = documents.appendingPathComponent(
-                UUID().uuidString.prefix(23) + ".txt")
+            let fileName = String(UUID().uuidString.prefix(23) + ".txt")
             
             do {
-                try "Hello World".data(using: .utf8)?.write(to: url)
+                try "Hello World".data(using: .utf8)?.write(to: documents.appendingPathComponent(fileName))
                 print("File created")
             } catch {
                 print("Error \(error)")
             }
 
-            let entry = FileEntry(timeCreated: Date(), fileType: UTType.text, url: url)
+            let entry = FileEntry(timeCreated: Date(), fileType: UTType.text, relativeFilePath: fileName)
             
             DispatchQueue.main.async {
                 withAnimation {
@@ -109,7 +108,7 @@ struct FileEntryListView: View {
         withAnimation {
             for index in offsets {
                 do {
-                    try FileManager.default.removeItem(at: entries[index].url)
+                    try FileManager.default.removeItem(at: entries[index].url!)
                     print("File deleted")
                 } catch {
                     print("Error \(error)")

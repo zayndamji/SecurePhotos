@@ -7,16 +7,22 @@ final class FileEntry {
     var timeCreated: Date
     var timeModified: Date
     var fileTypeString: String
-    var url: URL
+    var relativeFilePath: String
     
     var fileType: UTType? {
         UTType(fileTypeString)
     }
     
-    init(timeCreated: Date, fileType: UTType, url: URL) {
+    var url: URL? {
+        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let url = documents.appendingPathComponent(relativeFilePath)
+        return url
+    }
+    
+    init(timeCreated: Date, fileType: UTType, relativeFilePath: String) {
         self.timeCreated = timeCreated
         self.timeModified = timeCreated
         self.fileTypeString = fileType.identifier
-        self.url = url
+        self.relativeFilePath = relativeFilePath
     }
 }

@@ -19,7 +19,7 @@ struct FileEntryView: View {
                     .padding()
             }
         }
-        .navigationTitle(entry.url.lastPathComponent)
+        .navigationTitle(entry.url!.lastPathComponent)
         .onAppear {
             loadFile()
         }
@@ -27,7 +27,7 @@ struct FileEntryView: View {
 
     private func loadFile() {
         do {
-            let data = try Data(contentsOf: entry.url)
+            let data = try Data(contentsOf: entry.url!)
             let type = entry.fileType
 
             if type?.conforms(to: .image) == true {
