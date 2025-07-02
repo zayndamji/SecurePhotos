@@ -1,10 +1,3 @@
-//
-//  SecurePhotosApp.swift
-//  SecurePhotos
-//
-//  Created by Zayn Damji on 7/1/25.
-//
-
 import SwiftUI
 import SwiftData
 
@@ -12,7 +5,7 @@ import SwiftData
 struct SecurePhotosApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            FileEntry.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

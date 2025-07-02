@@ -1,25 +1,19 @@
-//
-//  ContentView.swift
-//  SecurePhotos
-//
-//  Created by Zayn Damji on 7/1/25.
-//
-
 import SwiftUI
 import SwiftData
+import UniformTypeIdentifiers
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query private var entries: [FileEntry]
 
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(items) { item in
+                ForEach(entries) { entry in
                     NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        FileEntryView(url: entry.url)
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        Text(entry.timeCreated, format: Date.FormatStyle(date: .numeric, time: .standard))
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -41,15 +35,34 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+            let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let url = documents.appendingPathComponent(
+                UUID().uuidString + ".txt")
+            
+            do {
+                try "Hello World".data(using: .utf8)?.write(to: url)
+                print("File created")
+            } catch {
+                print("Error")
+            }
+
+            let entry = FileEntry(timeCreated: Date(), fileType: UTType.text, url: url)
+            
+            modelContext.insert(entry)
         }
     }
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(items[index])
+                do {
+                    try FileManager.default.removeItem(at: entries[index].url)
+                    print("File deleted")
+                } catch {
+                    print("Error")
+                }
+            
+                modelContext.delete(entries[index])
             }
         }
     }
@@ -57,5 +70,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: FileEntry.self, inMemory: true)
 }

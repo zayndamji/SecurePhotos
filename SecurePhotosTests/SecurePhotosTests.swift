@@ -1,10 +1,3 @@
-//
-//  SecurePhotosTests.swift
-//  SecurePhotosTests
-//
-//  Created by Zayn Damji on 7/1/25.
-//
-
 import Testing
 @testable import SecurePhotos
 

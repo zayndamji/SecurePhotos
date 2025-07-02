@@ -1,10 +1,3 @@
-//
-//  SecurePhotosUITestsLaunchTests.swift
-//  SecurePhotosUITests
-//
-//  Created by Zayn Damji on 7/1/25.
-//
-
 import XCTest
 
 final class SecurePhotosUITestsLaunchTests: XCTestCase {
