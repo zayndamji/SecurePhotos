@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7A0B89C02E15EDA5000E6AE3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7A0B89BE2E15EDA1000E6AE3 /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		7A97448B2E1492D9000CCB26 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A0B89BE2E15EDA1000E6AE3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7A97447B2E1492D8000CCB26 /* SecurePhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecurePhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A97448A2E1492D9000CCB26 /* SecurePhotosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SecurePhotosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9744942E1492D9000CCB26 /* SecurePhotosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SecurePhotosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +84,7 @@
 				7A97448D2E1492D9000CCB26 /* SecurePhotosTests */,
 				7A9744972E1492D9000CCB26 /* SecurePhotosUITests */,
 				7A97447C2E1492D8000CCB26 /* Products */,
+				7A0B89BE2E15EDA1000E6AE3 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -212,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A0B89C02E15EDA5000E6AE3 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
